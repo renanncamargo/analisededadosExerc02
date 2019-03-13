@@ -30,7 +30,26 @@ groupsum (chuvas, "cidade", "chuva")
 
 ## 2 - Binario para Decimal
 
-binToDec <-
+binToDec <- function(...){
+  tamanhos <- NULL
+  lista <- list(...)
+  tamLista <- length(lista)
+  resultado <- NULL
+  x <- 0
+  for (vec in list(...)) {
+    tamanhos <- c(tamanhos, length(vec))
+  }
+  for(i in 1:tamLista){
+    k <- tamanhos[[i]]
+    for(j in (1:tamanhos[[i]])){
+      x <- x + ((lista[[i]][[j]])*(2^(k-1)))
+      k <- k-1
+    }
+    resultado <- c(resultado, x)
+    x <- 0
+  }
+  return(resultado)
+}
 
 ##### Exemplos no PDF:
 ##### binToDec(c(1, 0))
