@@ -58,7 +58,22 @@ binToDec <- function(...){
 
 ## 3 - Ocorrencia de Palavras
 
-wordCount <-
+wordCount <- function(countText, text){
+  tamanho <- 0
+  total <- 0
+  words <- strsplit(gsub("!", "", gsub("[.]", "", gsub(",", "", text))), " ")
+  
+  for (vec in words) {
+    tamanho <- length(vec)
+  }
+  
+  for(i in 1:tamanho){
+    if(toupper(countText) == toupper(words[[1]][[i]]))
+      total <- total + 1
+  }
+  return(total)
+}
+
 
 ##### Exemplos no PDF:
 ##### text <- "O rAto roeu a roupa do Rei de Roma! RainhA raivosa rasgou o resto."
@@ -67,20 +82,42 @@ wordCount <-
 ##### text <- "A vaca malHada foi molhADA por outra VACA, MOLhada e MALhaDa."
 ##### wordCount("outra", text)
 ##### wordCount("vaca", text)
-##### wordCount("malhada", text)
+##### wordCount("molhada", text)
 ##### text <- "Se a liga me ligasse, eu tambem ligava a liga. Mas a liga nao me liga, eu tambem nao ligo a liga."
 ##### wordCount("liga", text)
 ##### wordCount("ligasse", text)
 
 ## 4 - Ordenacao de Panquecas
 
-giro <-
+giro <- function(vector, i){
+  tamanho <- length(vector)
+  aux <- 0
+  aux <- vector[tamanho]
+  vector[tamanho] <- vector[i]
+  vector[i] <- aux
+  return(vector)
+} 
 
-ordenar <-
+ordenar <- function(vector){
+  #auxVector <- NULL
+  tamanho <- length(vector)
+      for (i in 1:tamanho) {
+        maximo <- max(vector[i:tamanho])
+        if (vector[i] == maximo){
+          for(j in i:tamanho){
+            teste <- 1
+            vector <- giro(vector, i)
+            print(vector)
+            vector <- vector[tamanho:j]
+            teste <- teste +1
+          }
+        }
+    }
+}
 
 ##### Exemplos no PDF:
 ##### panquecas <- c(3,4,1,2)
 ##### giro(panquecas, 2)
-##### panquecas <- ordenar(panquecas)
+##### panqueca <- ordenar(panquecas)
 ##### pilha <- c(2, 10, 4, 8, 6, 9, 1, 5, 7, 3)
 ##### pilha <- ordenar(pilha)
